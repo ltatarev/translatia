@@ -1,0 +1,32 @@
+.file-uploader__container {
+  align-items: center;
+  border-radius: 20px;
+  box-shadow: 5px 5px 35px rgb(0 0 0 / 10%);
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  height: 200px;
+  justify-content: center;
+  margin: auto;
+  width: 460px;
+}
+
+.file-uploader__container:hover {
+  background-color: var(--highlight);
+  transition: 0.2s ease-in all;
+}
+
+.dropzone__container {
+  padding: 10px;
+}
+
+.dropzone__active-drop {
+  background-color: var(--green);
+  border-radius: 10px;
+  transition: 0.2s ease-in all;
+}
+
+.dropzone__paragraph {
+  cursor: pointer;
+  font-size: small;
+}

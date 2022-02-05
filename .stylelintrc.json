@@ -1,0 +1,16 @@
+{
+  "extends": "stylelint-config-standard",
+  "plugins": [
+    "stylelint-order"
+  ],
+  "rules": {
+    "selector-id-pattern": null,
+    "selector-class-pattern": null,
+    "declaration-block-single-line-max-declarations": null,
+    "order/order": [
+      "custom-properties",
+      "declarations"
+    ],
+    "order/properties-alphabetical-order": true
+  }
+}
