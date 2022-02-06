@@ -1,13 +1,17 @@
 import { useCallback, useMemo, useState } from 'react';
+import { useSelector } from 'react-redux';
 import _ from 'lodash';
-import PropTypes from 'prop-types';
 import './index.css';
+import { getCurrentFileName, getOriginalSubtitles } from '../subtitles';
 import { HelperFooter } from './components';
 import { parseSrt } from './services';
 
-export function Editor({ file, name }) {
+export function Editor() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [currentInput, setCurrentInput] = useState('');
+
+  const file = useSelector(getOriginalSubtitles);
+  const name = useSelector(getCurrentFileName);
 
   const content = useMemo(() => parseSrt(file), [file]);
   const contentSize = useMemo(() => _.size(content), [content]);
@@ -57,8 +61,3 @@ export function Editor({ file, name }) {
     </div>
   );
 }
-
-Editor.propTypes = {
-  file: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-};

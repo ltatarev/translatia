@@ -1,24 +1,26 @@
-import { useCallback, useMemo, useState } from 'react';
-import _ from 'lodash';
+import { useCallback } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import './index.css';
 import { Editor } from '../editor';
 import { FileUploader } from '../file-uploader';
+import { isFileUploaded, uploadFile } from '../subtitles';
 
 export function App() {
-  const [file, setFile] = useState(null);
-  const [fileName, setFileName] = useState('');
+  const dispatch = useDispatch();
 
-  const handleFileUploaded = useCallback((name, content) => {
-    setFile(content);
-    setFileName(name);
-  }, []);
+  const handleFileUploaded = useCallback(
+    (name, content) => {
+      dispatch(uploadFile({ name, subtitle: content }));
+    },
+    [dispatch],
+  );
 
-  const isFileUploaded = useMemo(() => !_.isEmpty(file), [file]);
+  const hasFile = useSelector(isFileUploaded);
 
   return (
     <div>
-      {!isFileUploaded && <FileUploader onFileUploaded={handleFileUploaded} />}
-      {isFileUploaded && <Editor file={file} name={fileName} />}
+      {!hasFile && <FileUploader onFileUploaded={handleFileUploaded} />}
+      {hasFile && <Editor />}
     </div>
   );
 }

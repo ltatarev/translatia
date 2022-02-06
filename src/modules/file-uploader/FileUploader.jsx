@@ -1,7 +1,6 @@
 /* eslint-disable no-undef */
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
-import classNames from 'classnames';
 import _ from 'lodash';
 import PropTypes from 'prop-types';
 import './index.css';
@@ -36,12 +35,6 @@ export function FileUploader({ onFileUploaded }) {
     onDrop,
   });
 
-  const dropzoneClassnames = useMemo(() => {
-    classNames('dropzone__container', {
-      'dropzone__active-drop': isDragActive,
-    });
-  }, [isDragActive]);
-
   if (loading) {
     return (
       <div className="file-uploader__container">
@@ -53,7 +46,7 @@ export function FileUploader({ onFileUploaded }) {
   return (
     <div className="file-uploader__container">
       <h3>Upload your file</h3>
-      <div {...getRootProps()} className={dropzoneClassnames}>
+      <div {...getRootProps()} className="dropzone__container">
         <input {...getInputProps()} />
         {isDragActive ? (
           <p className="dropzone__paragraph">Drop the files here ...</p>
