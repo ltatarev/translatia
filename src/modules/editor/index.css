@@ -1,0 +1,53 @@
+.editor__container {
+  border-radius: 20px;
+  box-shadow: 5px 5px 35px rgb(0 0 0 / 10%);
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  margin: auto;
+  min-width: 500px;
+  padding: 30px 60px;
+  width: 800px;
+}
+
+.editor__title-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0 10px;
+}
+
+.editor__title {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.editor__lines {
+  font-size: 14px;
+}
+
+.editor__current-line {
+  font-size: 1.5em;
+  font-weight: 600;
+}
+
+#editor__current-input {
+  background: var(--white);
+  border: 0;
+  box-sizing: border-box;
+  color: #343434;
+  display: block;
+  font-family: Poppins, sans-serif;
+  font-size: 1em;
+  height: 100px;
+  outline: 0;
+  overflow-y: hidden;
+  resize: none;
+  width: 100%;
+}
+
+.editor__helper-footer {
+  display: flex;
+  justify-content: flex-end;
+  opacity: 0.7;
+}

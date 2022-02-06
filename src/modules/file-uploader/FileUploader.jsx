@@ -2,6 +2,7 @@
 import { useCallback, useMemo, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 import classNames from 'classnames';
+import _ from 'lodash';
 import PropTypes from 'prop-types';
 import './index.css';
 
@@ -16,13 +17,13 @@ export function FileUploader({ onFileUploaded }) {
       acceptedFiles.forEach((file) => {
         const reader = new FileReader();
 
-        reader.onabort = () => null;
+        reader.onabort = _.noop();
         reader.onerror = () => setError('File reading has failed');
         reader.onload = () => {
           const fileStr = reader.result;
 
           setLoading(false);
-          return onFileUploaded(fileStr);
+          return onFileUploaded(file.name, fileStr);
         };
 
         reader.readAsText(file);
