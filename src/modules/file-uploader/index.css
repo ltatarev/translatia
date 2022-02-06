@@ -13,6 +13,7 @@
 
 .file-uploader__container:hover {
   background-color: var(--highlight);
+  cursor: pointer;
   transition: 0.2s ease-in all;
 }
 
@@ -27,6 +28,5 @@
 }
 
 .dropzone__paragraph {
-  cursor: pointer;
   font-size: small;
 }
