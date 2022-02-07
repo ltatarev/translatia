@@ -19,7 +19,7 @@ export const subtitlesReducer = createReducer(INITIAL_STATE, (builder) => {
     }))
     .addCase(addUpdatedSubtitles, (state, action) => ({
       ...state,
-      updatedSubtitles: action.payload,
+      updatedSubtitles: [...state.updatedSubtitles, action.payload],
     }))
     .addCase(uploadFile, (state, action) => ({
       ...state,

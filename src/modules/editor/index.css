@@ -5,9 +5,8 @@
   flex: 1;
   flex-direction: column;
   margin: auto;
-  min-width: 500px;
   padding: 30px 60px;
-  width: 800px;
+  width: 700px;
 }
 
 .editor__title-row {

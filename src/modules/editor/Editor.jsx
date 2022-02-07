@@ -1,14 +1,23 @@
 import { useCallback, useMemo, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import _ from 'lodash';
 import './index.css';
-import { getCurrentFileName, getOriginalSubtitles } from '../subtitles';
+import {
+  addUpdatedSubtitles,
+  getCurrentFileName,
+  getOriginalSubtitles,
+} from '../subtitles';
 import { HelperFooter } from './components';
 import { parseSrt } from './services';
+
+// TODO: Continue where you left off
+// TODO: Update based on counter as ID
 
 export function Editor() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [currentInput, setCurrentInput] = useState('');
+
+  const dispatch = useDispatch();
 
   const file = useSelector(getOriginalSubtitles);
   const name = useSelector(getCurrentFileName);
@@ -33,6 +42,15 @@ export function Editor() {
     if (key === 'Enter') {
       e.preventDefault();
       setCurrentIndex((prev) => prev + 1);
+
+      dispatch(
+        addUpdatedSubtitles({
+          ...content[currentIndex],
+          subtitle: _.isEmpty(currentInput)
+            ? content[currentIndex].subtitle
+            : currentInput,
+        }),
+      );
       setCurrentInput('');
     }
   }
