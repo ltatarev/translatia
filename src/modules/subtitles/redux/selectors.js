@@ -4,9 +4,9 @@ import { MODULE_NAME } from '../const';
 
 const getSubtitlesState = (state) => state[MODULE_NAME];
 
-export const getCurrentFileName = createSelector(
+export const getCurrentFileData = createSelector(
   [getSubtitlesState],
-  (state) => state.fileName,
+  (state) => state.metadata,
 );
 
 export const getOriginalSubtitles = createSelector(
