@@ -1,27 +1,28 @@
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import _ from 'lodash';
 import './index.css';
 import {
   addUpdatedSubtitles,
+  exportSrt,
   getCurrentFileData,
   getOriginalSubtitles,
   reset,
 } from '../subtitles';
 import { HelperFooter, Toolbar } from './components';
-import { parseSrt } from './services';
+import { downloadFile } from './services';
 
 export function Editor() {
   const [currentInput, setCurrentInput] = useState('');
 
   const dispatch = useDispatch();
 
-  const file = useSelector(getOriginalSubtitles);
+  const content = useSelector(getOriginalSubtitles);
   const { shortFileName: fileName, totalLines, currentLine } = useSelector(
     getCurrentFileData,
   );
 
-  const content = useMemo(() => parseSrt(file), [file]);
+  const subtitle = content[currentLine]?.subtitle;
 
   const handleInputChange = useCallback(
     (event) => setCurrentInput(event.target.value),
@@ -29,6 +30,12 @@ export function Editor() {
   );
 
   const handleResetPress = useCallback(() => dispatch(reset()), [dispatch]);
+  const handleDownloadPress = useCallback(() => {
+    const { payload: { fileName: name, subtitles } } = dispatch(exportSrt());
+
+    return downloadFile(name, subtitles);
+  },
+  [dispatch]);
 
   function handleKeyDown(e) {
     const { key } = e;
@@ -45,7 +52,7 @@ export function Editor() {
         addUpdatedSubtitles({
           ...content[currentLine],
           subtitle: _.isEmpty(currentInput)
-            ? content[currentLine].subtitle
+            ? content[currentLine]?.subtitle
             : currentInput,
         }),
       );
@@ -53,7 +60,10 @@ export function Editor() {
     }
   }
 
-  const { subtitle } = content[currentLine];
+  // TODO: Handle last line
+  if (totalLines <= currentLine) {
+    return <p style={{ cursor: 'pointer' }} onClick={handleResetPress}>End!</p>;
+  }
 
   return (
     <div className="editor__main-container">
@@ -79,7 +89,7 @@ export function Editor() {
         <HelperFooter />
       </div>
       <Toolbar
-        onDownloadPress={() => null}
+        onDownloadPress={handleDownloadPress}
         onResetPress={handleResetPress}
       />
     </div>

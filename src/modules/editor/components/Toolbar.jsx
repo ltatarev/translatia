@@ -8,7 +8,7 @@ function Toolbar({ onDownloadPress, onResetPress }) {
     <div className="editor__toolbar-container">
       <HoverIcon
         iconSrc={downloadIcon}
-        label="Download file"
+        label="Download"
         onPress={onDownloadPress}
       />
       <HoverIcon

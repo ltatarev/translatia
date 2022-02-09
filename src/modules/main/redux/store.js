@@ -3,6 +3,7 @@ import { combineReducers } from 'redux';
 import { createLogger } from 'redux-logger';
 import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
+import thunk from 'redux-thunk';
 import { MODULE_NAME, subtitlesReducer } from '../../subtitles';
 
 const persistConfig = {
@@ -14,7 +15,7 @@ const logger = createLogger();
 
 const development = import.meta.env.MODE === 'development';
 
-const middlewares = [];
+const middlewares = [thunk];
 
 if (development) {
   middlewares.push(logger);

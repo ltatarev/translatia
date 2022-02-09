@@ -21,3 +21,10 @@ export function parseSrt(srt) {
     [],
   );
 }
+
+export function arrayToSrt(subtitles) {
+  return _.reduce(subtitles,
+    // eslint-disable-next-line
+    (result, line) => `${result}${line.counter}\n${line.time}\n${line.subtitle}\n\r\n`,
+    '');
+}

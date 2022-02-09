@@ -1,5 +1,6 @@
 import { createReducer } from '@reduxjs/toolkit';
 import _ from 'lodash';
+import { parseSrt } from '../../editor/services';
 import {
   addOriginalSubtitles,
   addUpdatedSubtitles,
@@ -20,14 +21,18 @@ const INITIAL_STATE = {
 
 export const subtitlesReducer = createReducer(INITIAL_STATE, (builder) => {
   builder
-    .addCase(addOriginalSubtitles, (state, action) => ({
-      ...state,
-      originalSubtitles: action.payload,
-      metadata: {
-        ...state.metadata,
-        totalLines: _.size(action.payload),
-      },
-    }))
+    .addCase(addOriginalSubtitles, (state, action) => {
+      const content = parseSrt(action.payload);
+
+      return {
+        ...state,
+        originalSubtitles: content,
+        metadata: {
+          ...state.metadata,
+          totalLines: _.size(content),
+        },
+      };
+    })
     .addCase(addUpdatedSubtitles, (state, action) => ({
       ...state,
       updatedSubtitles: [...state.updatedSubtitles, action.payload],
@@ -36,16 +41,21 @@ export const subtitlesReducer = createReducer(INITIAL_STATE, (builder) => {
         currentLine: _.size([...state.updatedSubtitles, action.payload]),
       },
     }))
-    .addCase(uploadFile, (state, action) => ({
-      ...state,
-      originalSubtitles: action.payload.subtitle,
-      metadata: {
-        ...state.metadata,
-        fileName: action.payload.name,
-        shortFileName: _.truncate(action.payload.name, { length: 50 }),
-        currentLine: 0,
-        totalLines: _.size(action.payload.subtitle),
-      },
-    }))
+    .addCase(uploadFile, (state, action) => {
+      const { subtitle, name } = action.payload;
+      const content = parseSrt(subtitle);
+
+      return {
+        ...state,
+        originalSubtitles: content,
+        metadata: {
+          ...state.metadata,
+          fileName: name,
+          shortFileName: _.truncate(name, { length: 50 }),
+          currentLine: 0,
+          totalLines: _.size(content),
+        },
+      };
+    })
     .addCase(reset, () => INITIAL_STATE);
 });
