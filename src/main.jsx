@@ -8,6 +8,9 @@ import { App, store } from './modules';
 
 const persistor = persistStore(store);
 
+// eslint-disable-next-line no-console
+console.log('✨ hello traveler 🎇');
+
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>

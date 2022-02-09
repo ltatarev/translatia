@@ -12,10 +12,18 @@ const persistConfig = {
 
 const logger = createLogger();
 
+const development = import.meta.env.MODE === 'development';
+
+const middlewares = [];
+
+if (development) {
+  middlewares.push(logger);
+}
+
 const reducers = combineReducers({ [MODULE_NAME]: subtitlesReducer });
 const persistedReducer = persistReducer(persistConfig, reducers);
 
 export const store = configureStore({
   reducer: persistedReducer,
-  middleware: [logger],
+  middleware: middlewares,
 });

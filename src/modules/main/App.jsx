@@ -1,6 +1,5 @@
 import { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import './index.css';
 import { Editor } from '../editor';
 import { FileUploader } from '../file-uploader';
 import { isFileUploaded, uploadFile } from '../subtitles';
