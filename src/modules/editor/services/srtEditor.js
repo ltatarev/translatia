@@ -8,11 +8,13 @@ export function parseSrt(srt) {
     (result, line) => {
       const [counter, time, subtitle] = line.split('\n');
 
-      result.push({
-        counter: counter.trim(),
-        time: time.trim(),
-        subtitle: subtitle.trim(),
-      });
+      if (counter && time && subtitle) {
+        result.push({
+          counter: counter.trim(),
+          time: time.trim(),
+          subtitle: subtitle.trim(),
+        });
+      }
 
       return result;
     },
