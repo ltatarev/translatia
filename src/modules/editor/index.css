@@ -1,3 +1,8 @@
+.editor__main-container {
+  display: flex;
+  flex-direction: row;
+}
+
 .editor__container {
   border-radius: 20px;
   box-shadow: 5px 5px 35px rgb(0 0 0 / 10%);
@@ -49,4 +54,33 @@
   display: flex;
   justify-content: flex-end;
   opacity: 0.7;
+}
+
+.editor__toolbar-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  margin: 10px;
+}
+
+.editor__toolbar-button-text {
+  font-size: 15px;
+  font-weight: 600;
+  margin: 5px;
+  opacity: 0;
+}
+
+.editor__toolbar-button-text-hover {
+  opacity: 0.8;
+  transition: 1s all cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.editor__toolbar-button {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+}
+
+.editor__toolbar-button:hover {
+  cursor: pointer;
 }

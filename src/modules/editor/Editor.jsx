@@ -6,8 +6,9 @@ import {
   addUpdatedSubtitles,
   getCurrentFileData,
   getOriginalSubtitles,
+  reset,
 } from '../subtitles';
-import { HelperFooter } from './components';
+import { HelperFooter, Toolbar } from './components';
 import { parseSrt } from './services';
 
 export function Editor() {
@@ -26,6 +27,8 @@ export function Editor() {
     (event) => setCurrentInput(event.target.value),
     [],
   );
+
+  const handleResetPress = useCallback(() => dispatch(reset()), [dispatch]);
 
   function handleKeyDown(e) {
     const { key } = e;
@@ -50,27 +53,35 @@ export function Editor() {
     }
   }
 
+  const { subtitle } = content[currentLine];
+
   return (
-    <div>
-      <div className="editor__title-row">
-        <p className="editor__title">{fileName}</p>
-        <p className="editor__lines">
-          {currentLine + 1} / {totalLines} lines
-        </p>
+    <div className="editor__main-container">
+      <div>
+        <div className="editor__title-row">
+          <p className="editor__title">{fileName}</p>
+          <p className="editor__lines">
+            {currentLine + 1} / {totalLines} lines
+          </p>
+        </div>
+        <div className="editor__container">
+          <p className="editor__current-line">{subtitle}</p>
+          <textarea
+            id="editor__current-input"
+            name="subtitleInput"
+            placeholder="Type translation here..."
+            rows="1"
+            value={currentInput}
+            onChange={handleInputChange}
+            onKeyDown={handleKeyDown}
+          />
+        </div>
+        <HelperFooter />
       </div>
-      <div className="editor__container">
-        <p className="editor__current-line">{content[currentLine].subtitle}</p>
-        <textarea
-          id="editor__current-input"
-          name="subtitleInput"
-          placeholder="Type translation here..."
-          rows="1"
-          value={currentInput}
-          onChange={handleInputChange}
-          onKeyDown={handleKeyDown}
-        />
-      </div>
-      <HelperFooter />
+      <Toolbar
+        onDownloadPress={() => null}
+        onResetPress={handleResetPress}
+      />
     </div>
   );
 }

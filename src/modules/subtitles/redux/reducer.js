@@ -3,6 +3,7 @@ import _ from 'lodash';
 import {
   addOriginalSubtitles,
   addUpdatedSubtitles,
+  reset,
   uploadFile,
 } from './actions';
 
@@ -45,5 +46,6 @@ export const subtitlesReducer = createReducer(INITIAL_STATE, (builder) => {
         currentLine: 0,
         totalLines: _.size(action.payload.subtitle),
       },
-    }));
+    }))
+    .addCase(reset, () => INITIAL_STATE);
 });

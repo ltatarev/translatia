@@ -15,8 +15,4 @@ function HelperFooter() {
   );
 }
 
-HelperFooter.propTypes = {};
-
-HelperFooter.defaultProps = {};
-
 export default React.memo(HelperFooter);
