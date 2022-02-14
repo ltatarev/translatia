@@ -11,9 +11,9 @@ Web application for editing and translating `.srt` subtitles. Built with React a
 #### Built using:
 * `vite` - build tool
 * `redux` - state management
-    - `redux toolkit`
-    - `redux logger`
-    - `redux persist`
-    - `redux thunk`
-* `react dropzone` - drag and drop file uploading
-* `eslint, stylelint` - code formatting
+    - `redux-toolkit`
+    - `redux-logger`
+    - `redux-persist`
+    - `redux-thunk`
+* `react-dropzone` - drag and drop file uploading
+* `eslint`, `stylelint` - code formatting
