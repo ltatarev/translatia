@@ -1,5 +1,7 @@
 import _ from 'lodash';
 
+const NEW_LINE_SPLIT = '\n\n';
+
 function resolveSubtitle(subtitle, rest) {
   if (!_.isEmpty(rest)) {
     return `${subtitle.trim()} ${rest[0].trim()}`;
@@ -9,7 +11,8 @@ function resolveSubtitle(subtitle, rest) {
 }
 
 export function parseSrt(srt) {
-  const lines = srt.split('\n\r\n');
+  // TODO: Look into splitting by \n\r\n
+  const lines = srt.split(NEW_LINE_SPLIT);
 
   return _.reduce(
     lines,
@@ -33,8 +36,7 @@ export function parseSrt(srt) {
 export function arrayToSrt(subtitles) {
   return _.reduce(
     subtitles,
-    // eslint-disable-next-line
-    (result, line) => `${result}${line.counter}\n${line.time}\n${line.subtitle}\n\r\n`,
+    (result, line) => `${result}${line.counter}\n${line.time}\n${line.subtitle}${NEW_LINE_SPLIT}`,
     '',
   );
 }
