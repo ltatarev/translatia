@@ -1,6 +1,6 @@
 #  ⌨️ translatia
 
-[![](https://img.shields.io/badge/GitHub_Pages-8B89CC?style=for-the-badge&logo=github&logoColor=white "GitHub Pages")](https://ltatarev.github.io/translatia/)
+[![Deploy to Pages](https://github.com/ltatarev/translatia/actions/workflows/vite.yml/badge.svg)](https://github.com/ltatarev/translatia/actions/workflows/vite.yml)
 
 Web application for editing and translating `.srt` subtitles. Built with React and Vite.
 
