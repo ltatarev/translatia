@@ -1,7 +1,9 @@
 {
-  "extends": "@menelaia/react",
+  "extends": ["@menelaia/react", "plugin:tailwindcss/recommended"],
+  "plugins": ["tailwindcss"],
   "rules": {
-    "react/react-in-jsx-scope": 0
+    "react/react-in-jsx-scope": 0,
+    "max-len": "off"
   },
   "parserOptions": {
     "ecmaVersion": 11
