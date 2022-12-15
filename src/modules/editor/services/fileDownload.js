@@ -1,11 +1,13 @@
-/* eslint-disable no-undef */
 export function downloadFile(fileName, content) {
+  const file = new Blob([content]);
+
   const element = document.createElement('a');
-  const file = new Blob([content], {
-    type: 'text/plain',
-  });
   element.href = URL.createObjectURL(file);
-  element.download = fileName;
+  element.setAttribute('download', `${fileName}.srt`);
   document.body.appendChild(element);
+
   element.click();
+
+  // Clean up after download
+  element.parentNode.removeChild(element);
 }

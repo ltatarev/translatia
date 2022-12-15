@@ -2,13 +2,16 @@
   "extends": ["@menelaia/react", "plugin:tailwindcss/recommended"],
   "plugins": ["tailwindcss"],
   "rules": {
-    "react/react-in-jsx-scope": 0,
-    "max-len": "off"
+    "react/react-in-jsx-scope": "off",
+    "max-len": "off",
+    "linebreak-style": "off"
   },
   "parserOptions": {
     "ecmaVersion": 11
   },
   "globals": {
+    "Blob": "writable",
+    "document": "writable",
     "FileReader": "writable",
     "fetch": "readonly"
   }

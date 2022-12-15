@@ -49,7 +49,7 @@ export function FileUploader({ onFileUploaded }) {
   return (
     <>
       <div className="m-auto flex flex-col place-content-center justify-center rounded-xl bg-slate-50 p-10 text-center hover:cursor-pointer hover:bg-white hover:transition-all hover:ease-in-out">
-        <h3>Upload your file</h3>
+        <h3 className="font-bold">Upload your file</h3>
         <div {...getRootProps()} className="p-10">
           <input {...getInputProps()} />
           {isDragActive ? (

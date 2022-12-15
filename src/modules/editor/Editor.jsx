@@ -18,9 +18,11 @@ export function Editor() {
   const dispatch = useDispatch();
 
   const content = useSelector(getOriginalSubtitles);
-  const { shortFileName: fileName, totalLines, currentLine } = useSelector(
-    getCurrentFileData,
-  );
+  const {
+    shortFileName: fileName,
+    totalLines,
+    currentLine,
+  } = useSelector(getCurrentFileData);
 
   const subtitle = content[currentLine]?.subtitle;
 
@@ -31,11 +33,12 @@ export function Editor() {
 
   const handleResetPress = useCallback(() => dispatch(reset()), [dispatch]);
   const handleDownloadPress = useCallback(() => {
-    const { payload: { fileName: name, subtitles } } = dispatch(exportSrt());
+    const {
+      payload: { fileName: name, subtitles },
+    } = dispatch(exportSrt());
 
     return downloadFile(name, subtitles);
-  },
-  [dispatch]);
+  }, [dispatch]);
 
   function handleKeyDown(e) {
     const { key } = e;
@@ -62,7 +65,32 @@ export function Editor() {
 
   // TODO: Handle last line
   if (totalLines <= currentLine) {
-    return <p style={{ cursor: 'pointer' }} onClick={handleResetPress}>End!</p>;
+    return (
+      <>
+        <div
+          className="flex items-center justify-center hover:cursor-pointer"
+          role="button"
+          tabIndex="0"
+          onClick={handleResetPress}
+          onKeyPress={handleResetPress}
+        >
+          <p className="mt-10 w-fit rounded-xl bg-neutral-300 py-2 px-4 text-center text-sm font-bold text-slate-500 hover:bg-neutral-400 hover:text-slate-100">
+            Start over?
+          </p>
+        </div>
+        <div
+          className="flex items-center justify-center hover:cursor-pointer"
+          role="button"
+          tabIndex="-1"
+          onClick={handleDownloadPress}
+          onKeyPress={handleDownloadPress}
+        >
+          <p className="mt-10 w-fit rounded-xl bg-neutral-600 py-2 px-4 text-center text-sm font-bold text-slate-50 hover:bg-neutral-400 hover:text-slate-100">
+            Download
+          </p>
+        </div>
+      </>
+    );
   }
 
   return (
