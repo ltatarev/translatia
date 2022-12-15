@@ -2,28 +2,28 @@ import { useCallback, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 import _ from 'lodash';
 import PropTypes from 'prop-types';
-import { ExampleFile } from '../../../examples';
+import { FILE_NAME, getExampleFile } from '../../../examples';
 
 export function FileUploader({ onFileUploaded }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const handleExampleClick = useCallback(() => onFileUploaded('Reacher.S01E01.Welcome.to.Margrave', ExampleFile), [onFileUploaded]);
+  const handleExampleClick = useCallback(() => {
+    getExampleFile().then((text) => onFileUploaded(FILE_NAME, text));
+  }, [onFileUploaded]);
 
   const handleDrop = useCallback(
     (acceptedFiles) => {
       setLoading(true);
-      console.log(acceptedFiles);
+
       acceptedFiles.forEach((file) => {
-        console.log(file);
-        // eslint-disable-next-line no-undef
         const reader = new FileReader();
 
         reader.onabort = _.noop();
         reader.onerror = () => setError('File reading has failed');
         reader.onload = () => {
           const fileStr = reader.result;
-          console.log(fileStr);
+
           setLoading(false);
           return onFileUploaded(file.name, fileStr);
         };
@@ -35,7 +35,7 @@ export function FileUploader({ onFileUploaded }) {
   );
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
-    handleDrop,
+    onDrop: handleDrop,
   });
 
   if (loading) {
@@ -63,8 +63,16 @@ export function FileUploader({ onFileUploaded }) {
 
         {!!error && <p>{error}</p>}
       </div>
-      <div className="flex items-center justify-center hover:cursor-pointer" role="button" tabIndex="0" onClick={handleExampleClick} onKeyPress={handleExampleClick}>
-        <p className="mt-10 w-fit rounded-xl bg-neutral-300 py-2 px-4 text-center text-sm font-bold text-slate-500 hover:bg-neutral-400 hover:text-slate-100">Try example file</p>
+      <div
+        className="flex items-center justify-center hover:cursor-pointer"
+        role="button"
+        tabIndex="0"
+        onClick={handleExampleClick}
+        onKeyPress={handleExampleClick}
+      >
+        <p className="mt-10 w-fit rounded-xl bg-neutral-300 py-2 px-4 text-center text-sm font-bold text-slate-500 hover:bg-neutral-400 hover:text-slate-100">
+          Try example file
+        </p>
       </div>
     </>
   );
