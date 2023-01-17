@@ -1,4 +1,4 @@
-#  ⌨️ translatia
+# ⌨️ translatia
 
 [![Deploy to Pages](https://github.com/ltatarev/translatia/actions/workflows/vite.yml/badge.svg)](https://github.com/ltatarev/translatia/actions/workflows/vite.yml)
 ![react](https://user-images.githubusercontent.com/38048916/207945756-39abbf2b-c5d1-4317-bb28-9f0faa5b8b0c.svg)
@@ -9,8 +9,6 @@
 ![eslint](https://user-images.githubusercontent.com/38048916/207945659-c4ed8358-6824-4aa1-9860-652834aa6308.svg)
 
 Web application for editing and translating `.srt` subtitles.
+Character encoding is done using `Windows-1250`.
 
 ![preview](https://user-images.githubusercontent.com/38048916/153944916-bb27c380-2bdc-496c-bdc6-3dbf8a13457f.gif)
-
-
-
