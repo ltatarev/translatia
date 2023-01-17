@@ -28,7 +28,7 @@ export function FileUploader({ onFileUploaded }) {
           return onFileUploaded(file.name, fileStr);
         };
 
-        reader.readAsText(file);
+        reader.readAsText(file, 'windows-1250');
       });
     },
     [onFileUploaded],
