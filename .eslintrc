@@ -1,5 +1,5 @@
 {
-  "extends": ["@menelaia/react", "plugin:tailwindcss/recommended"],
+  "extends": ["@ltatarev/react", "plugin:tailwindcss/recommended"],
   "plugins": ["tailwindcss"],
   "rules": {
     "react/react-in-jsx-scope": "off",
